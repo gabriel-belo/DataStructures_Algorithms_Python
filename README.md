@@ -17,3 +17,15 @@ Revisão da estratégia sistematica usada para solucionar o problema:
   <li>Analisar a complexidade do algoritmo e identificar ineficiências, se existir.</li>
   <li>Aplicar a técnica certa para passar pela ineficiência. Repetir os passos 3 a 6.</li>
 </ol>
+
+Problems for Practice
+Here are some resources to learn more and find problems to practice.
+
+    Assignment on Binary Search: https://jovian.ai/aakashns/python-binary-search-assignment
+    Binary Search Problems on LeetCode: https://leetcode.com/problems/binary-search/
+    Binary Search Problems on GeeksForGeeks: https://www.geeksforgeeks.org/binary-search/
+    Binary Search Problems on Codeforces: https://codeforces.com/problemset?tags=binary+search
+
+Use this template for solving problems: https://jovian.ai/aakashns/python-problem-solving-template
+
+Start a discussion on the forum: https://jovian.ai/forum/c/data-structures-and-algorithms-in-python/lesson-1-binary-search-linked-lists-and-complex/81
