@@ -205,7 +205,7 @@ def loctae_card_LinearSearch2(cards, query):
 #print(locate_card_Linear_Search(cartas, query))
 
 #Utilizando a biblioteca jovian
-#from jovian.pythondsa import evaluate_test_case, evaluate_test_cases
+from jovian.pythondsa import evaluate_test_case, evaluate_test_cases
 
 #verificando todos os testes
 #evaluate_test_cases(locate_card_Linear_Search, tests)
@@ -231,7 +231,132 @@ def loctae_card_LinearSearch2(cards, query):
 # processar um input)
 
 #Utilizando o caso da busca linear como exemplo:
-#1. A complexidade do tempo para este algoritmo é cN, c sendo uma variável constante que é a variável da qual o computador leva para executar uma busca,
-# vezes N que é o número máximo de iterações que podemos executar em uma iteração, a multiplicação dos dois resulta no tempo de execução.
+#1. A complexidade do tempo para este algoritmo é cN, c sendo uma variável constante que é a variável da qual o computador leva para executar uma declaração
+# (no caso uma busca),vezes N que é o número máximo de iterações que podemos executar em uma iteração, a multiplicação dos dois resulta no tempo de execução.
+#A constante C depende do número de operações que nós executamos em cada iteração, então em cada Loop por exemplo temos quatro para cinco declarações e,
+#em seguida, o tempo necessário para executar uma declaraç ão sobre seu específico Hardware, agora se tem um computador de 2GHzque pode ser duas vezes mais
+#rápido que um computador de 1GHz ou se estiver executando em um celular pode variar também, C captura todas essas variáveis. Então pega informações sobre
+#cada operação executada e informações sobre o Hardware. Neste caso a complexidade do tempo é proporcional ao tamanho do input.
 #2. a complexidade do espaço é uma constante c(independente de N), pois precisamos apenas de uma única variável position para iterar pelo array, e ela
 # ocupa um espaço constante na memória do computador (RAM)
+
+#Notação Big O
+#No Big O, descartamos constantes fixas e potências menores de variáveis para capturar a tendência da relação entre o tamanho da entrada e a
+#complexidade do algoritmo, ou seja, se a complexidade do algoritmo for cN^3 + dN ^2 + eN + f, na notação Big O ela é expressa como O(N^3)
+
+#6. Aplicar a técnica certa para passar pela ineficiência. 
+#Até o momento estavamos rodando todas as cartas até encontrar a que estavamos porcurando. Agora iremos usar uma técnica diferente conhecida como busca binaria
+#Onde procuramos a carta porém de forma mais efitiva sempre eliminando metada das cartas presentes
+
+#7.Buscando a solução mais efetiva para o problema.
+#Como iremos utilizar a busca binária para aplicar ao problema:
+#1. Buscar o elemento do meio da lista
+#2. Se bater com o número que estamos procurando retornamos o índice do número
+#3. Se for menor que o número, então procuramos o meio da lista para os números maiores que este
+#4. Se for maior que o número, então procuramos o meio da lista para os números menores que este
+#5. Se não houver mais nenhum elemento restante na lista, retornamos -1
+
+#8. Implementar a solução e testar
+
+def test_location(cards, query, mid):
+    mid_number= cards[mid]
+    print(" mid:", mid, ", mid_number: ", mid_number)
+    if mid_number == query:
+        if mid -1 >= 0 and cards[mid-1] == query:
+            return 'left'
+        else:
+            return 'found'
+    elif mid_number< query:
+        return 'left'
+    else:
+        return 'right'
+
+def binarySearch(cards, query):
+
+     lo, hi= 0, len(cards) - 1
+
+     while lo <= hi:
+         mid= (lo + hi) // 2
+         mid_number= cards[mid]
+         result = test_location(cards, query, mid)
+
+         if result == 'found':
+             return mid
+
+         elif result == 'left':
+             hi= mid - 1
+
+         elif result == 'right':
+             lo= mid + 1
+
+         print("lo:", lo, "hi:", hi, ", mid:", mid, ", mid_number: ", mid_number)
+
+
+     return -1
+
+#Vamos testar os casos
+#evaluate_test_cases(binarySearch, tests)
+
+#Depois que escrevemos o algoritmo, talvez vamos querer adicionar alguns testes:
+#1. O número está na primeira metade da matriz
+#2. O número está na segunda metade da matriz
+
+#Código final:
+def test_location(cards, query, mid):
+    mid_number= cards[mid]
+    if mid_number == query:
+        if mid -1 >= 0 and cards[mid-1] == query:
+            return 'left'
+        else:
+            return 'found'
+    elif mid_number< query:
+        return 'left'
+    else:
+        return 'right'
+
+def binarySearch(cards, query):
+
+     lo, hi= 0, len(cards) - 1
+
+     while lo <= hi:
+         mid= (lo + hi) // 2
+         mid_number= cards[mid]
+         result = test_location(cards, query, mid)
+
+         if result == 'found':
+             return mid
+
+         elif result == 'left':
+             hi= mid - 1
+
+         elif result == 'right':
+             lo= mid + 1
+
+     return -1
+
+#9. Analizar a complexidade do algoritmo e identificar ineficiências, se existir alguma.
+#O algoritmo tem complexidade O(log n) pois n é dividido pela metade a cada execução.
+
+#Busca Linear vs Busca Binária
+
+def locate_card_linear(cards, query):
+    position= 0
+    while position < len(cards):
+        if cards[position] == query:
+            return position
+        position += 1
+    return -1
+
+large_test={
+    'input':{
+        'cards': list(range(10000000, 0, -1)),
+        'query': 2
+    },
+    'output': 9999998
+}
+
+result, passed, runtime= evaluate_test_case(locate_card_linear, large_test, display= False)
+print("Result: {}\nPassed: {}\nExecution Time: {} ms".format(result, passed, runtime))
+
+result, passed, runtime= evaluate_test_case(binarySearch, large_test, display= False)
+print("Result: {}\nPassed: {}\nExecution Time: {} ms".format(result, passed, runtime))
