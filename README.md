@@ -29,3 +29,6 @@ Here are some resources to learn more and find problems to practice.
 Use this template for solving problems: https://jovian.ai/aakashns/python-problem-solving-template
 
 Start a discussion on the forum: https://jovian.ai/forum/c/data-structures-and-algorithms-in-python/lesson-1-binary-search-linked-lists-and-complex/81
+
+<h2>Lesson 2</h2>
+
